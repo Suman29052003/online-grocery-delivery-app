@@ -1,8 +1,11 @@
+
+
+
 const groceryItems = [
     {
       id: 1,
       name: "Organic Bananas",
-      image: "https://example.com/images/banana.jpg",
+      image: '/banana.jpg',
       price: 0.99,
       description: "Fresh organic bananas, perfect for a healthy snack.",
       rating: 4.8,
@@ -10,7 +13,7 @@ const groceryItems = [
     {
       id: 2,
       name: "Almond Milk",
-      image: "https://example.com/images/almond-milk.jpg",
+      image: "/almond-milk.jpg",
       price: 2.99,
       description: "Unsweetened almond milk, dairy-free and delicious.",
       rating: 4.5,
@@ -18,7 +21,7 @@ const groceryItems = [
     {
       id: 3,
       name: "Whole Wheat Bread",
-      image: "https://example.com/images/whole-wheat-bread.jpg",
+      image: "/whole-wheat-bread.jpg",
       price: 3.49,
       description: "Soft and healthy whole wheat bread, great for sandwiches.",
       rating: 4.7,
@@ -26,7 +29,7 @@ const groceryItems = [
     {
       id: 4,
       name: "Eggs (Dozen)",
-      image: "https://example.com/images/eggs.jpg",
+      image: "/eggs.jpg",
       price: 2.79,
       description: "Cage-free eggs, rich in protein and essential nutrients.",
       rating: 4.9,
@@ -34,7 +37,7 @@ const groceryItems = [
     {
       id: 5,
       name: "Greek Yogurt",
-      image: "https://example.com/images/greek-yogurt.jpg",
+      image: "/green-yogurt.jpg",
       price: 1.99,
       description: "Thick and creamy Greek yogurt, high in protein.",
       rating: 4.6,
@@ -42,7 +45,7 @@ const groceryItems = [
     {
       id: 6,
       name: "Chicken Breast",
-      image: "https://example.com/images/chicken-breast.jpg",
+      image: "/chicken-breasth.jpg",
       price: 5.99,
       description: "Boneless, skinless chicken breast, lean and healthy.",
       rating: 4.7,
@@ -50,7 +53,7 @@ const groceryItems = [
     {
       id: 7,
       name: "Broccoli",
-      image: "https://example.com/images/broccoli.jpg",
+      image: "/brocoil.jpg",
       price: 1.69,
       description: "Fresh broccoli florets, perfect for steaming or roasting.",
       rating: 4.8,
@@ -58,7 +61,7 @@ const groceryItems = [
     {
       id: 8,
       name: "Cheddar Cheese",
-      image: "https://example.com/images/cheddar-cheese.jpg",
+      image: "/cheddar-cheese.jpg",
       price: 4.49,
       description: "Sharp cheddar cheese, great for sandwiches and snacks.",
       rating: 4.7,
@@ -66,7 +69,7 @@ const groceryItems = [
     {
       id: 9,
       name: "Peanut Butter",
-      image: "https://example.com/images/peanut-butter.jpg",
+      image: "/peanut-butter.jpg",
       price: 3.99,
       description: "Creamy peanut butter, perfect for spreading on toast.",
       rating: 4.6,
@@ -74,7 +77,7 @@ const groceryItems = [
     {
       id: 10,
       name: "Apples (Fuji)",
-      image: "https://example.com/images/apples.jpg",
+      image: "/apples.jpg",
       price: 1.29,
       description: "Crisp and sweet Fuji apples, great for snacking.",
       rating: 4.8,
@@ -82,7 +85,7 @@ const groceryItems = [
     {
       id: 11,
       name: "Quinoa",
-      image: "https://example.com/images/quinoa.jpg",
+      image: "/quinoa.jpg",
       price: 4.29,
       description: "Organic quinoa, a healthy alternative to rice.",
       rating: 4.7,
@@ -90,7 +93,7 @@ const groceryItems = [
     {
       id: 12,
       name: "Spinach",
-      image: "https://example.com/images/spinach.jpg",
+      image: "/spincach.jpg",
       price: 2.49,
       description: "Fresh spinach leaves, packed with iron and vitamins.",
       rating: 4.8,
@@ -98,7 +101,7 @@ const groceryItems = [
     {
       id: 13,
       name: "Salmon Fillet",
-      image: "https://example.com/images/salmon-fillet.jpg",
+      image: "/salmon-fillet.jpg",
       price: 9.99,
       description: "Wild-caught salmon fillet, rich in omega-3 fatty acids.",
       rating: 4.9,
