@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
+import { CartProvider, useCart } from "react-use-cart";
 
-const ItemCard = ({id, name, image, price, rating, description}) => {
+
+const ItemCard = ({id, name, image, price, rating, description, item}) => {
+    const { addItem } = useCart();
     const [hover, setHover] = useState('inActive')
   const renderStars = (rating) => {
     const roundedRating = Math.round(rating);
@@ -30,6 +33,10 @@ const ItemCard = ({id, name, image, price, rating, description}) => {
         </ListGroup.Item>
         <ListGroup.Item className='text-sm'>{description}</ListGroup.Item>
       </ListGroup>
+      <Card.Body className='flex justify-between items-center text-white font-medium'>
+       <button className='bg-[tomato] p-[12px] rounded-md ' onClick={addItem(item)}>Add to Cart</button>
+       <button className='bg-[#40c901] p-[12px] rounded-md '>Buy Now</button>
+      </Card.Body>
     </Card>
   )
 }

@@ -3,12 +3,13 @@ import logo from '/logo.png'
 import cart from '/cart.png'
 import user from '/user.png'
 import menu from '/menu.png'
+import { Link } from 'react-router-dom'
 
 const Navbar = () => {
  const [active, setActive] = useState('Home')
 
   return (
-    <section className='w-full flex items-center justify-around'>
+    <section className='w-full flex items-center justify-around m-auto'>
       <div className="logo">
             <img src={logo} alt="" className='w-[11vw]'/>
       </div>
@@ -22,10 +23,10 @@ const Navbar = () => {
       </div>
       <div className="user">
         <ul className="flex gap-8">
-            <li className="relative cursor-pointer hover:scale-105">
+            <Link to='/cart'><li className="relative cursor-pointer hover:scale-105">
                 <img src={cart} alt="" className='w-8' />
                 <div className="bg-[green] w-3 h-3 absolute rounded-full bottom-7 left-7"></div>
-            </li>
+            </li></Link>
             <li className="cursor-pointer hover:scale-105"><img src={user} alt="" className='w-8'/></li>
             <li className="cursor-pointer hover:scale-105"><img src={menu} alt="" className='w-8'/></li>
         </ul>
