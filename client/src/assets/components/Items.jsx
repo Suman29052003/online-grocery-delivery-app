@@ -1,23 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import groceryItems from '../GroceryAssets';
+import ItemCard from './ItemCard';
 
 const Items = () => {
-
-
-
   return (
-    <section id='items' className='w-full'>
-      <h2 className='text-xl font-bold mb-4'>Available Items</h2>
-      <ul>
+    <section id='items' className='w-full p-4'>
+      <h2 className='text-xl sm:text-4xl font-medium text-[#40c901] text-center mb-4'>Available Items</h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
         {groceryItems.map((item) => (
-          <li key={item.id} className='mb-2'>
-            <img src={item.image} alt="" className="w-40 h-[10vw]" />
-            <p className="">{item.name} {item.rating}</p>
-            <p className="">{item.price}</p>
-            <p className="">{item.description}</p>
-          </li>
+          <ItemCard 
+            key={item.id}
+            name={item.name}
+            price={item.price}
+            rating={item.rating}
+            description={item.description}
+            image={item.image}
+          />
         ))}
-      </ul>
+      </div>
     </section>
   );
 };

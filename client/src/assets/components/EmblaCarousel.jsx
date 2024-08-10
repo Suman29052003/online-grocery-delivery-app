@@ -15,8 +15,8 @@ export function EmblaCarousel() {
       <div className="embla__container">
         {images.map((src, i) => {
           return (
-            <div className="embla__slide" key={i}>
-              <img src={src} alt="" className="embla__image w-[100%] max-h-[30vw]" />
+            <div className="embla__slide mt-8 w-full max-h-[70vh]" key={i}>
+              <img src={src} alt="" className="embla__image w-[100%] object-contain h-full" />
             </div>
           );
         })}
