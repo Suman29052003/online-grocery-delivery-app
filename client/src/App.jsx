@@ -1,27 +1,34 @@
-import React from 'react'
-import Navbar from './assets/components/Navbar'
-import Home from './assets/pages/Home'
-import Items from './assets/components/Items'
-import { CartProvider } from 'react-use-cart'
-import { BrowserRouter as Router, Routes,Route } from 'react-router-dom';
-import Cart from './assets/pages/Cart'
+import React from 'react';
+import Navbar from './assets/components/Navbar';
+import Home from './assets/pages/Home';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { CartProvider, useCart, } from 'react-use-cart';
+import Cart from './assets/pages/Cart';
 
 const App = () => {
-
   return (
     <Router>
-    <Navbar/>
-    <CartProvider>
-    <div className='w-[85%] m-auto'>
-      <Routes>
-      <Route path='/' element={<Home/>}/>
-      <Route path='/cart' element={<Cart/>}/>
-      </Routes>
-      <Items/>
-    </div>
-    </CartProvider>
+      <CartProvider>
+        <AppContent />
+      </CartProvider>
     </Router>
-  )
-}
+  );
+};
 
-export default App
+const AppContent = () => {
+  const { isEmpty, totalUniqueItems } = useCart();
+
+  return (
+    <>
+      <Navbar isCartEmpty={isEmpty} totalUniqueItems={totalUniqueItems} /> {/* Navbar is inside the CartProvider context */}
+      <div className='w-[85%] m-auto'>
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/cart' element={<Cart />} />
+        </Routes>
+      </div>
+    </>
+  );
+};
+
+export default App;
