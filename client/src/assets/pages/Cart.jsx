@@ -17,9 +17,9 @@ const Cart = () => {
     <>
       {isEmpty ? (
         <div className="w-full flex flex-col items-center">
-          <img src={emptyCartImage} alt="" className="w-full md:w-[50%]" />
+          <img src={emptyCartImage} alt="" className="w-full md:w-[50%] z-[-1]" />
           <span className='text-2xl font-semibold'>Cart is Empty!</span>
-          <Link to='/' className="underline text-blue-600 cursor-pointer">Add to cart</Link>
+          <Link to='/' className="underline text-blue-600 cursor-pointer px-4">Add to cart</Link>
           </div>
       ) : (
         <>
@@ -30,7 +30,10 @@ const Cart = () => {
             removeItem={removeItem}/>
         </>
       )}
+      {
+        isEmpty?"":
       <Link to='/#item' className="underline text-blue-600 cursor-pointer text-lg">Add more Item</Link>
+      }
     </>
   );
 }

@@ -5,39 +5,80 @@ import user from '/user.png';
 import menu from '/menu.png';
 import { Link } from 'react-router-dom';
 
-const Navbar = ({ isCartEmpty,totalUniqueItems }) => {
+const Navbar = ({ isCartEmpty, totalUniqueItems }) => {
   const [active, setActive] = useState('');
+  const [menuOpen, setMenuOpen] = useState(false); // State to manage menu toggle
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
 
   return (
-    <section className='w-full flex items-center justify-around m-auto'>
+    <section className='w-full flex items-center justify-between p-4 bg-white shadow-md z-0'>
       <div className="logo">
-        <img src={logo} alt="" className='w-[11vw]' />
+        <img src={logo} alt="Logo" className='w-[8rem]' />
       </div>
-      <div className="anchor-links">
-        <ul className="flex gap-6 text-xl">
+      
+      {/* Desktop Links */}
+      <div className="hidden md:flex anchor-links">
+        <ul className="flex gap-6 text-xl items-center">
           <Link to='/' onClick={() => setActive('Home')} className={`cursor-pointer hover:scale-105 ${active === 'Home' ? 'border-b-[3px] border-[green] rounded-sm pb-1' : ""}`}>Home</Link>
           <a href='#about' onClick={() => setActive('About')} className={`cursor-pointer hover:scale-105 ${active === 'About' ? 'border-b-[3px] border-[green] rounded-sm pb-1' : ""}`}>About</a>
           <a href='#items' onClick={() => setActive('Items')} className={`cursor-pointer hover:scale-105 ${active === 'Items' ? 'border-b-[3px] border-[green] rounded-sm pb-1' : ""}`}>Items</a>
           <a href='#contact' onClick={() => setActive('Contact')} className={`cursor-pointer hover:scale-105 ${active === 'Contact' ? 'border-b-[3px] border-[green] rounded-sm pb-1' : ""}`}>Contact</a>
-        </ul>
-      </div>
-      <div className="user">
-        <ul className="flex gap-8">
-          <Link to='/cart'>
-            <li className="relative cursor-pointer hover:scale-105">
-              <img src={cart} alt="" className='w-8' />
+          
+          {/* Cart and User Icons */}
+          <Link to='/cart' className="relative cursor-pointer hover:scale-105">
+            <li>
+              <img src={cart} alt="Cart" className='w-8' />
               {!isCartEmpty && (
-                // <div className="bg-[green] w-3 h-3 absolute rounded-full bottom-7 left-7"></div>
-                <div class="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -end-2 dark:border-gray-900">{totalUniqueItems}</div>
+                <div className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -end-2 dark:border-gray-900">{totalUniqueItems}</div>
               )}
             </li>
           </Link>
-          <li className="cursor-pointer hover:scale-105"><img src={user} alt="" className='w-8' /></li>
-          <li className="cursor-pointer hover:scale-105"><img src={menu} alt="" className='w-8' /></li>
+          <Link to='/profile' className="cursor-pointer hover:scale-105">
+            <li>
+              <img src={user} alt="User" className='w-8' />
+            </li>
+          </Link>
         </ul>
       </div>
+      
+      {/* Mobile Menu Icon */}
+      <div className="flex md:hidden">
+        <button onClick={toggleMenu}>
+          <img src={menu} alt="Menu" className='w-8' />
+        </button>
+      </div>
+
+      {/* Mobile Menu Links */}
+      {menuOpen && (
+        <div className="absolute top-16 left-0 w-full bg-white shadow-md md:hidden z-10">
+          <ul className="flex flex-col items-center gap-6 p-4">
+            <Link to='/' onClick={() => { setActive('Home'); toggleMenu(); }} className={`cursor-pointer hover:scale-105 ${active === 'Home' ? 'border-b-[3px] border-[green] rounded-sm pb-1' : ""}`}>Home</Link>
+            <a href='/#about' onClick={() => { setActive('About'); toggleMenu(); }} className={`cursor-pointer hover:scale-105 ${active === 'About' ? 'border-b-[3px] border-[green] rounded-sm pb-1' : ""}`}>About</a>
+            <a href='/#items' onClick={() => { setActive('Items'); toggleMenu(); }} className={`cursor-pointer hover:scale-105 ${active === 'Items' ? 'border-b-[3px] border-[green] rounded-sm pb-1' : ""}`}>Items</a>
+            <a href='/#contact' onClick={() => { setActive('Contact'); toggleMenu(); }} className={`cursor-pointer hover:scale-105 ${active === 'Contact' ? 'border-b-[3px] border-[green] rounded-sm pb-1' : ""}`}>Contact</a>
+            
+            {/* Cart and User Icons in Mobile Menu */}
+            <Link to='/cart' onClick={toggleMenu} className="relative cursor-pointer hover:scale-105">
+              <li>
+                <img src={cart} alt="Cart" className='w-8' />
+                {!isCartEmpty && (
+                  <div className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-red-500 border-2 border-white rounded-full -top-2 -end-2 dark:border-gray-900">{totalUniqueItems}</div>
+                )}
+              </li>
+            </Link>
+            <Link to='/profile' onClick={toggleMenu} className="cursor-pointer hover:scale-105">
+              <li>
+                <img src={user} alt="User" className='w-8' />
+              </li>
+            </Link>
+          </ul>
+        </div>
+      )}
     </section>
-  )
-}
+  );
+};
 
 export default Navbar;
