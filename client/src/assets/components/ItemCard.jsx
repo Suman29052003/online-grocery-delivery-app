@@ -3,14 +3,14 @@ import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
 import { useCart } from "react-use-cart";
 
-const ItemCard = ({ id, name, image, price, rating, description, item }) => {
-  const { addItem,items } = useCart();
+const ItemCard = ({ id, name, image, price, rating, description }) => {
+  const { addItem } = useCart();
   const [hover, setHover] = useState("inActive");
 
 const handleAddToCart = () => {
   addItem({
     id: id,
-    itemId: id, // Keep the original id as a separate property
+    itemId: id, 
     name,
     price,
     image
