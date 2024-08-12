@@ -70,9 +70,9 @@ const Navbar = ({ isCartEmpty, totalUniqueItems }) => {
               </li>
             </Link>
             <Link to='/profile' onClick={toggleMenu} className="cursor-pointer hover:scale-105">
-              <li>
+              <Link to='/profile'>
                 <img src={user} alt="User" className='w-8' />
-              </li>
+              </Link>
             </Link>
           </ul>
         </div>

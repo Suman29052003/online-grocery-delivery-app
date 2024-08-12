@@ -18,6 +18,9 @@ export default function DataTable({ items, updateItemQuantity, removeItem }) {
     },
     { field: "name", headerName: "Item Name", minWidth: 200 },
     {
+      field:"price", headerName:"price ($)", minWidth:130
+    },
+    {
       field: "quantity",
       headerName: "Quantity",
       minWidth: 250,
@@ -67,6 +70,7 @@ export default function DataTable({ items, updateItemQuantity, removeItem }) {
     id: item.id,
     image: item.image,
     name: item.name,
+    price: item.price,
     quantity: item.quantity,
   }));
 

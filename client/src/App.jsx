@@ -4,6 +4,7 @@ import Home from './assets/pages/Home';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { CartProvider, useCart, } from 'react-use-cart';
 import Cart from './assets/pages/Cart';
+import Profile from './assets/pages/Profile';
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const AppContent = () => {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/cart' element={<Cart />} />
+          <Route path ='/profile' element={<Profile/>}/>
         </Routes>
       </div>
     </>
