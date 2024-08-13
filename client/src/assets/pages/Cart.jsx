@@ -3,6 +3,7 @@ import { useCart } from 'react-use-cart';
 import DataTable from '../components/DataTable';
 import emptyCartImage from '/cart_is_empty.jpg';
 import { Link } from 'react-router-dom';
+import FormDialog from '../components/FormDialog';
 
 const Cart = () => {
   const {
@@ -34,12 +35,7 @@ const Cart = () => {
               <p>Total Items: {totalUniqueItems}</p>
               <p>Total Price: ${cartTotal.toFixed(2)}</p>
             </div>
-            <Link
-              to='/checkout' // or wherever you handle the purchase
-              className="bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700"
-            >
-              Buy Now
-            </Link>
+            <FormDialog/>
           </div>
           <Link to='/#item' className="underline text-blue-600 cursor-pointer text-lg mt-4 block">Add more items</Link>
         </div>
