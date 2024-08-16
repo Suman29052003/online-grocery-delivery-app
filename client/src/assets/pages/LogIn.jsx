@@ -1,11 +1,51 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { toast,ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const navigate = useNavigate()
+
+  const handleLogIn = async (e) => {
+    e.preventDefault();
+
+    const data = {
+      email,
+      password,
+    };
+
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/user/login",
+        data, // Sending JSON object
+        {
+          headers: {
+            "Content-Type": "application/json", // Specify JSON content type
+          },
+        }
+      );
+      console.log(response.data);
+      console.log(response.data.message);
+      toast.success(response.data.message);
+        setTimeout(()=>{
+          navigate('/')
+        },1000)
+    } catch (error) {
+      console.error("Error in Client Side", error);
+      toast.error("Login failed. Please try again.");
+    }
+  };
+
   return (
-    <div className="max-h-[100vh] flex items-center justify-center ">
+    <div className="max-h-[100vh] flex items-center justify-center">
       <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-lg mt-12">
         <h2 className="text-3xl font-bold text-center text-gray-900">Sign in</h2>
-        <form className="mt-8 space-y-6">
+        <form className="mt-8 space-y-6" onSubmit={handleLogIn}>
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
               <label htmlFor="email-address" className="sr-only">
@@ -18,6 +58,7 @@ const Login = () => {
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Email address"
+                onChange={(e) => setEmail(e.target.value)} // Correct event handler
               />
             </div>
             <div>
@@ -31,6 +72,7 @@ const Login = () => {
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                 placeholder="Password"
+                onChange={(e) => setPassword(e.target.value)} // Correct event handler
               />
             </div>
           </div>
@@ -80,6 +122,18 @@ const Login = () => {
           </a>
         </p>
       </div>
+      <ToastContainer
+    position="top-right"
+    autoClose={5000}
+    hideProgressBar={false}
+    newestOnTop={false}
+    closeOnClick
+    rtl={false}
+    pauseOnFocusLoss
+    draggable
+    pauseOnHover
+    theme="light"
+  />
     </div>
   );
 };

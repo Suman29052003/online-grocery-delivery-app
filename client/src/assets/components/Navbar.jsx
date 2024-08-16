@@ -4,6 +4,7 @@ import cart from '/cart.png';
 import user from '/user.png';
 import menu from '/menu.png';
 import { Link } from 'react-router-dom';
+import { useRef } from 'react';
 
 const Navbar = ({ isCartEmpty, totalUniqueItems }) => {
   const [active, setActive] = useState('');
@@ -36,7 +37,7 @@ const Navbar = ({ isCartEmpty, totalUniqueItems }) => {
               )}
             </li>
           </Link>
-          <Link to='/profile' className="cursor-pointer hover:scale-105">
+          <Link to='/signup' className="cursor-pointer hover:scale-105">
             <li>
               <img src={user} alt="User" className='w-8' />
             </li>
@@ -69,8 +70,8 @@ const Navbar = ({ isCartEmpty, totalUniqueItems }) => {
                 )}
               </li>
             </Link>
-            <Link to='/profile' onClick={toggleMenu} className="cursor-pointer hover:scale-105">
-              <Link to='/profile'>
+            <Link to='/signup' onClick={toggleMenu} className="cursor-pointer hover:scale-105">
+              <Link to='/signup'>
                 <img src={user} alt="User" className='w-8' />
               </Link>
             </Link>
