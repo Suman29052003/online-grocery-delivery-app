@@ -2,7 +2,8 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/user.model')
 const multer = require('multer');
-const bcrypt = require('bcryptjs')
+const bcrypt = require('bcryptjs');
+const generateToken = require('../jsonWebToken/jwt');
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -30,8 +31,13 @@ router.post('/signup', upload.single('profilePicture') ,async (req, res) => {
         const newUser = new User({ ...data, profilePicture })
         const response = await newUser.save()
 
+        const payLoad ={
+            id:response.id,
+        }
+
             if(newUser){
-                return res.status(201).json({ message: "User created successfully.", user: response })
+                const token = generateToken(payLoad)
+                return res.status(201).json({ message: "User created successfully.", user: response, id:response.id,token:token })
             }
             else{
                 return res.status(400).json({ message: "Failed to create user." })
@@ -51,8 +57,12 @@ router.post('/login', async (req, res) => {
       }
   
       const user = await User.findOne({ email });
+      const payload ={
+        id:user.id
+      }
       if (user) {
-        return res.status(200).json({ message: 'Login Successful' });
+        const token = generateToken(payload)
+        return res.status(200).json({ message: 'Login Successful',id:user.id,token:token });
       } else {
         return res.status(404).json({ message: 'User Not Found' });
       }
