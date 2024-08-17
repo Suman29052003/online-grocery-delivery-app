@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { toast,ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleLogIn = async (e) => {
     e.preventDefault();
@@ -30,11 +29,17 @@ const Login = () => {
         }
       );
       console.log(response.data);
-      console.log(response.data.message);
-      toast.success(response.data.message);
-        setTimeout(()=>{
-          navigate('/')
-        },1000)
+      const token = response.data.token
+      console.log(token)
+      localStorage.setItem("token", token);
+      
+      if (token) {
+        toast.success(response.data.message);
+
+        setTimeout(() => {
+          navigate("/");
+        }, 1000);
+      }
     } catch (error) {
       console.error("Error in Client Side", error);
       toast.error("Login failed. Please try again.");
@@ -44,7 +49,9 @@ const Login = () => {
   return (
     <div className="max-h-[100vh] flex items-center justify-center">
       <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-lg mt-12">
-        <h2 className="text-3xl font-bold text-center text-gray-900">Sign in</h2>
+        <h2 className="text-3xl font-bold text-center text-gray-900">
+          Sign in
+        </h2>
         <form className="mt-8 space-y-6" onSubmit={handleLogIn}>
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
@@ -123,17 +130,17 @@ const Login = () => {
         </p>
       </div>
       <ToastContainer
-    position="top-right"
-    autoClose={5000}
-    hideProgressBar={false}
-    newestOnTop={false}
-    closeOnClick
-    rtl={false}
-    pauseOnFocusLoss
-    draggable
-    pauseOnHover
-    theme="light"
-  />
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </div>
   );
 };

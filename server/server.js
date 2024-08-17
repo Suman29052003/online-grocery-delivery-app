@@ -4,6 +4,7 @@ const dbCOnnection = require('./database/db');
 const bodyParser = require('body-parser')
 const app = express()
 require('dotenv').config()
+const path = require('path');
 const userRoutes = require('./routes/userRoute')
 
 
@@ -23,7 +24,7 @@ app.use(bodyParser.json())
 app.use(express.json());
 
 app.use('/user',userRoutes)
-
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.listen(port,(req,res)=>{
     console.log(`Server is running on port ${port}`)

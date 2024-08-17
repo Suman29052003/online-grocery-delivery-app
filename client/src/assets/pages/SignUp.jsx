@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import defaultProfilePic from "/defaultProfilePic.jpg";
+// import defaultProfilePic from "/defaultProfilePic.jpg";
 import axios from "axios";
+import defaultProfilePic from "/profileImage.jpg"
 import { toast,ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -36,7 +37,7 @@ const Signup = () => {
     formData.append("addressLine1", address1);
     formData.append("addressLine2", address2);
     formData.append("pinCode", pincode);
-    formData.append("profilePicture", profilePicture);
+    formData.append("profilePicture", profilePicture || defaultProfilePic);
 
     try {
       const response = await axios.post(
