@@ -6,6 +6,9 @@ import cart from "/cart.png";
 import user from "/user.png";
 import menu from "/menu.png";
 import { isLoggedIn } from "../auth";
+import { HashLink } from "react-router-hash-link";
+
+
 
 const Navbar = ({ isCartEmpty, totalUniqueItems }) => {
   const [active, setActive] = useState("");
@@ -40,8 +43,8 @@ const Navbar = ({ isCartEmpty, totalUniqueItems }) => {
           >
             Home
           </Link>
-          <a
-            href="#about"
+          <HashLink
+            to="/#about"
             onClick={() => setActive("About")}
             className={`cursor-pointer hover:scale-105 ${
               active === "About"
@@ -50,7 +53,7 @@ const Navbar = ({ isCartEmpty, totalUniqueItems }) => {
             }`}
           >
             About
-          </a>
+          </HashLink>
           <a
             href="#items"
             onClick={() => setActive("Items")}
@@ -62,8 +65,8 @@ const Navbar = ({ isCartEmpty, totalUniqueItems }) => {
           >
             Items
           </a>
-          <a
-            href="#contact"
+          <HashLink
+            to="/#contact"
             onClick={() => setActive("Contact")}
             className={`cursor-pointer hover:scale-105 ${
               active === "Contact"
@@ -72,8 +75,8 @@ const Navbar = ({ isCartEmpty, totalUniqueItems }) => {
             }`}
           >
             Contact
-          </a>
-          <Link
+          </HashLink>
+          <HashLink
             to="/profile"
             onClick={() => setActive("Profile")}
             className={`cursor-pointer hover:scale-105 ${
@@ -83,7 +86,7 @@ const Navbar = ({ isCartEmpty, totalUniqueItems }) => {
             }`}
           >
             Profile
-          </Link>
+          </HashLink>
 
           {/* Cart and User Icons */}
           <Link to="/cart" className="relative cursor-pointer hover:scale-105">
@@ -136,8 +139,8 @@ const Navbar = ({ isCartEmpty, totalUniqueItems }) => {
             >
               Home
             </Link>
-            <a
-              href="/#about"
+            <HashLink
+              to="/#about"
               onClick={() => {
                 setActive("About");
                 toggleMenu();
@@ -149,9 +152,9 @@ const Navbar = ({ isCartEmpty, totalUniqueItems }) => {
               }`}
             >
               About
-            </a>
-            <a
-              href="/#items"
+            </HashLink>
+            <HashLink
+              to="/#items"
               onClick={() => {
                 setActive("Items");
                 toggleMenu();
@@ -163,9 +166,9 @@ const Navbar = ({ isCartEmpty, totalUniqueItems }) => {
               }`}
             >
               Items
-            </a>
-            <a
-              href="/#contact"
+            </HashLink>
+            <HashLink
+              to="/#contact"
               onClick={() => {
                 setActive("Contact");
                 toggleMenu();
@@ -177,7 +180,7 @@ const Navbar = ({ isCartEmpty, totalUniqueItems }) => {
               }`}
             >
               Contact
-            </a>
+            </HashLink>
             <Link
               to="/profile"
               onClick={() => {

@@ -72,7 +72,7 @@ const Profile = () => {
         <div className="flex-grow">
           <h1 className="text-3xl font-bold mb-2">Name: {profile.name}</h1>
           <p className="text-lg text-gray-600 mb-4">Email: {profile.email}</p>
-          <p className="text-gray-700 mb-6">Mobile No: {profile.mobile}</p>
+          <p className="text-gray-700 mb-6">Mobile No: {profile.MobileNo}</p>
           <p className="text-gray-700 mb-6">Address Line 1: {profile.addressLine1}</p>
           <p className="text-gray-700 mb-6">Address Line 2: {profile.addressLine2}</p>
           <p className="text-gray-700 mb-6">Pin code: {profile.pinCode}</p>
