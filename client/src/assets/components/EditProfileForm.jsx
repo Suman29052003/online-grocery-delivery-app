@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 
 const EditProfileForm = ({ formValues, setFormValues, setEditing }) => {
+  const [profilePicture, setProfilePicture] = useState(null);
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormValues({
@@ -10,14 +12,31 @@ const EditProfileForm = ({ formValues, setFormValues, setEditing }) => {
     });
   };
 
+  const handleFileChange = (e) => {
+    setProfilePicture(e.target.files[0]);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const token = localStorage.getItem('token');
-      await axios.put("http://localhost:3000/user/update", formValues, {
+
+      // Create FormData to handle both text and file uploads
+      const formData = new FormData();
+      formData.append('name', formValues.name);
+      formData.append('mobile', formValues.mobile);
+      formData.append('addressLine1', formValues.addressLine1);
+      formData.append('addressLine2', formValues.addressLine2);
+      formData.append('pinCode', formValues.pinCode);
+      if (profilePicture) {
+        formData.append('profilePicture', profilePicture);
+      }
+
+      await axios.put("http://localhost:3000/user/profile/update", formData, {
         headers: {
-          "Authorization": `Bearer ${token}`
-        }
+          "Authorization": `Bearer ${token}`,
+          'Content-Type': 'multipart/form-data',
+        },
       });
       setEditing(false); // Exit edit mode
     } catch (error) {
@@ -28,7 +47,7 @@ const EditProfileForm = ({ formValues, setFormValues, setEditing }) => {
   return (
     <div className="mt-8 bg-white p-6 rounded-lg shadow-md border border-gray-200">
       <h2 className="text-2xl font-semibold mb-4">Edit Profile</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} encType="multipart/form-data">
         {/* Form fields */}
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-medium mb-2">Name</label>
@@ -44,7 +63,7 @@ const EditProfileForm = ({ formValues, setFormValues, setEditing }) => {
           <label className="block text-gray-700 text-sm font-medium mb-2">Mobile No</label>
           <input
             type="text"
-            name="mobile"
+            name="MobileNo"
             value={formValues.mobile}
             onChange={handleInputChange}
             className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
@@ -77,6 +96,15 @@ const EditProfileForm = ({ formValues, setFormValues, setEditing }) => {
             name="pinCode"
             value={formValues.pinCode}
             onChange={handleInputChange}
+            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block text-gray-700 text-sm font-medium mb-2">Profile Picture</label>
+          <input
+            type="file"
+            name="profilePicture"
+            onChange={handleFileChange}
             className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
           />
         </div>

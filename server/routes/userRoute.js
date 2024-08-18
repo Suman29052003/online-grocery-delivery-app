@@ -91,20 +91,52 @@ router.post('/login', async (req, res) => {
   });
 
   // PUT Method to update details and Password
-  router.put('/update', authMiddleware, async (req, res) => {
-  try {
-    const userId = req.body.id
-    const formValue = req.body
-    const user = await User.findByIdAndUpdate(userId, formValue, { new: true });
-    if (!user) {
-      return res.status(404).json({ message: 'User Not Found' });
-      }
-      return res.status(200).json({ message: 'User Updated Successfully', user: user });
-      } catch (error) {
-        console.error(error);
-        return res.status(500).json({ message: 'Server Error' });
-        }
+  router.put('/profile/update', authMiddleware, upload.single('profilePicture'), async (req, res) => {
+    try {
+      const userId = req.user.id;
+      const formValues = req.body;
   
-  })
+      // If there's a new profile picture, update the path
+      if (req.file) {
+        formValues.profilePicture = req.file.path;
+      }
+  
+      const user = await User.findByIdAndUpdate(userId, formValues, { new: true });
+      if (!user) {
+        return res.status(404).json({ message: 'User Not Found' });
+      }
+  
+      return res.status(200).json({ message: 'User Updated Successfully', user });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ message: 'Server Error' });
+    }
+  });
+
+// PUT Method for Updating Password
+router.put('/profile/updatePassword', authMiddleware, async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const { currentPassword, newPassword } = req.body;
+
+    if (!currentPassword || !newPassword) {
+      return res.status(400).json({ message: "Both passwords are required" });
+    }
+
+    const user = await User.findById(userId);
+    if (!user || !(await user.comparePassword(currentPassword))) {
+      return res.status(401).json({ message: "Invalid current password" });
+    }
+
+    user.password = newPassword;
+    await user.save(); // This triggers the validation
+
+    return res.status(200).json({ message: "Password updated successfully" });
+  } catch (error) {
+    return res.status(500).json({ message: "Internal Server Error",Error:error });
+  }
+});
+
+
 
 module.exports = router

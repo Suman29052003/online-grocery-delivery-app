@@ -50,7 +50,7 @@ userSchema.virtual('confirmPassword')
 
 // Middleware to check password confirmation
 userSchema.pre('validate', function (next) {
-  if (this.isModified('password') && this.password !== this._confirmPassword) {
+  if (this.isModified('password') && this._confirmPassword !== undefined && this.password !== this._confirmPassword) {
     this.invalidate('confirmPassword', 'Passwords do not match');
   }
   next();
