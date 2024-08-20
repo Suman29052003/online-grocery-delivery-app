@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useCart } from 'react-use-cart';
 import DataTable from '../components/DataTable';
 import emptyCartImage from '/cart_is_empty.jpg';
@@ -12,8 +12,30 @@ const Cart = () => {
     items,
     updateItemQuantity,
     removeItem,
-    cartTotal
+    cartTotal,
+    emptyCart
   } = useCart();
+
+  useEffect(()=>{
+    try {
+      const token = localStorage.getItem('token')
+      if(!token){
+        console.warn('token not found');
+      }
+      const response = axios.get('http://localhost:3000/user/items',{
+        headers: {
+          'Authorization': `Bearer ${token}`
+          }
+      })
+console.log(response)
+
+
+
+
+    } catch (error) {
+      
+    }
+  })
 
   return (
     <>
@@ -35,7 +57,7 @@ const Cart = () => {
               <p>Total Items: {totalUniqueItems}</p>
               <p>Total Price: ${cartTotal.toFixed(2)}</p>
             </div>
-            <FormDialog/>
+            <FormDialog items={items} totalItems={totalUniqueItems} totalPrice={cartTotal.toFixed(2)} emptyCart={emptyCart}/>
           </div>
           <Link to='/#item' className="underline text-blue-600 cursor-pointer text-lg mt-4 block">Add more items</Link>
         </div>

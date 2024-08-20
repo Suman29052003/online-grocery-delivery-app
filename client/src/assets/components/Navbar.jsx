@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
 import logo from "/logo.png";
 import cart from "/cart.png";
@@ -13,14 +13,15 @@ import { HashLink } from "react-router-hash-link";
 const Navbar = ({ isCartEmpty, totalUniqueItems }) => {
   const [active, setActive] = useState("");
   const [menuOpen, setMenuOpen] = useState(false); // State to manage menu toggle
-
+const navigate = useNavigate()
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
 
   const handleLogOut = () =>{
     localStorage.removeItem('token')
-    window.location.href('/')
+    window.location.reload()
+    navigate('/')
   }
 
   return (

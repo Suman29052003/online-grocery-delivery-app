@@ -15,6 +15,8 @@ const Profile = () => {
     addressLine1: '',
     addressLine2: '',
     pinCode: '',
+    state:'',
+    city:''
   });
 
   useEffect(() => {
@@ -38,6 +40,8 @@ const Profile = () => {
           addressLine1: user.addressLine1 || '',
           addressLine2: user.addressLine2 || '',
           pinCode: user.pinCode || '',
+          state: user.state|| '',
+          city: user.city || '',
         });
       } catch (error) {
         console.error("Error fetching user profile:", error);
@@ -75,6 +79,8 @@ const Profile = () => {
           <p className="text-gray-700 mb-6">Mobile No: {profile.MobileNo}</p>
           <p className="text-gray-700 mb-6">Address Line 1: {profile.addressLine1}</p>
           <p className="text-gray-700 mb-6">Address Line 2: {profile.addressLine2}</p>
+          <p className="text-gray-700 mb-6">Pin code: {profile.city}</p>
+          <p className="text-gray-700 mb-6">Pin code: {profile.state}</p>
           <p className="text-gray-700 mb-6">Pin code: {profile.pinCode}</p>
 
           {/* Buttons */}

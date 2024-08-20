@@ -21,6 +21,14 @@ const userSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    city: {
+      type: String,
+      required: true
+    },
+    state: {
+      type: String,
+      required: true
+    },
     profilePicture: {
       type: String,
     },

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
 import { useCart } from "react-use-cart";
+import FormDialog from "./FormDialog";
 
 const ItemCard = ({ id, name, image, price, rating, description }) => {
   const { addItem } = useCart();
@@ -68,7 +69,7 @@ const handleAddToCart = () => {
         >
           Add to Cart
         </button>
-        <button className="bg-[#40c901] p-[12px] rounded-md ">Buy Now</button>
+
       </Card.Body>
     </Card>
   );

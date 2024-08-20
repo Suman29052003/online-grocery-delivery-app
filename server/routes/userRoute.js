@@ -4,7 +4,8 @@ const User = require('../models/user.model')
 const multer = require('multer');
 // const bcrypt = require('bcryptjs');
 const generateToken = require('../jsonWebToken/jwt');
-const authMiddleware = require('../jsonWebToken/authMiddleware')
+const authMiddleware = require('../jsonWebToken/authMiddleware');
+const Items = require('../models/item.model');
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -136,6 +137,35 @@ router.put('/profile/updatePassword', authMiddleware, async (req, res) => {
     return res.status(500).json({ message: "Internal Server Error",Error:error });
   }
 });
+
+
+//POST Method to get Items Details
+router.post('/order', authMiddleware, async (req, res) => {
+  try {
+    const { userId, items, address = {}, totalItems, totalPrice } = req.body; // Default to an empty object
+
+    if (!address.addressLine1) {
+      return res.status(400).json({ error: 'Address Line 1 is required' });
+    }
+
+    const newOrder = new Items({
+      userId,
+      items,
+      address,
+      totalItems,
+      totalPrice,
+    });
+
+    await newOrder.save();
+
+    res.status(201).json({ message: 'Order placed successfully', order: newOrder });
+  } catch (error) {
+    console.error('Error placing order:', error);
+    res.status(500).json({ error: 'Failed to place order' });
+  }
+});
+
+
 
 
 

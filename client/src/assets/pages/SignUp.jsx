@@ -18,6 +18,8 @@ const Signup = () => {
   const [address2, setAddress2] = useState("");
   const [pincode, setPincode] = useState("");
   const [profilePicture, setProfilePicture] = useState(defaultProfilePic);
+  const [city, setCity] = useState('');
+  const [state, setState] = useState('');
   
   const navigate = useNavigate()
   
@@ -38,6 +40,8 @@ const Signup = () => {
     formData.append("addressLine2", address2);
     formData.append("pinCode", pincode);
     formData.append("profilePicture", profilePicture || defaultProfilePic);
+    formData.append("state", state );
+    formData.append("city",city);
 
     try {
       const response = await axios.post(
@@ -159,6 +163,36 @@ const Signup = () => {
                 placeholder="Mobile Number"
                 value={mobileNumber}
                 onChange={(e) => setMobileNumber(e.target.value)}
+              />
+            </div>
+            <div>
+              <label htmlFor="city" className="sr-only">
+                City
+              </label>
+              <input
+                id="city"
+                name="city"
+                type="text"
+                required
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                placeholder="City"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+              />
+            </div>
+            <div>
+              <label htmlFor="state" className="sr-only">
+                State
+              </label>
+              <input
+                id="state"
+                name="state"
+                type="text"
+                required
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                placeholder="State"
+                value={state}
+                onChange={(e) => setState(e.target.value)}
               />
             </div>
             <div>
